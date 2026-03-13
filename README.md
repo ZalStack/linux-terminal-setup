@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Linux Terminal Setup
 
 Modern Linux terminal configuration using Alacritty + Zsh + Powerlevel10k with fast plugins and developer-friendly aliases.
@@ -233,3 +234,7 @@ https://wiki.archlinux.org/title/Zsh
 License
 
 MIT License
+=======
+# linux-terminal-setup
+My Config Terminal  Alacritty + zsh + p10k
+>>>>>>> fe8f752a8b004b47fd7ca41691d3d0c8340b1fe2
