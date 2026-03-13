@@ -1,240 +1,316 @@
-<<<<<<< HEAD
-Linux Terminal Setup
+# 🚀 Linux Terminal Setup
 
-Modern Linux terminal configuration using Alacritty + Zsh + Powerlevel10k with fast plugins and developer-friendly aliases.
+Modern Linux terminal configuration using **Alacritty + Zsh + Powerlevel10k**.
 
-This repository contains my personal terminal configuration (dotfiles) designed for a fast, minimal, and productive development environment.
+This repository contains my personal **terminal dotfiles** designed for a **fast, minimal, and productive development environment**.
 
-Features
+---
 
-⚡ Fast terminal using Alacritty
+![Linux](https://img.shields.io/badge/Linux-Terminal-blue)
+![Shell](https://img.shields.io/badge/Shell-Zsh-green)
+![Theme](https://img.shields.io/badge/Theme-Powerlevel10k-orange)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-🐚 Powerful shell using Zsh
+---
 
-🎨 Beautiful prompt using Powerlevel10k
+# ✨ Features
 
-🧠 Command suggestions with autosuggestions
+* ⚡ **GPU accelerated terminal** using Alacritty
+* 🐚 **Powerful shell** with Zsh
+* 🎨 **Beautiful prompt** powered by Powerlevel10k
+* 🧠 **Command autosuggestions**
+* 🎯 **Syntax highlighting for commands**
+* 🔍 **Fast searching** using `fzf`, `fd`, and `ripgrep`
+* 🧰 Developer aliases for:
 
-🎯 Syntax highlighting for commands
+  * Git
+  * Docker
+  * Laravel
+  * Node / Bun / PNPM
+  * Python
+  * Database tools
 
-🔍 Fast file search using fzf, fd, and ripgrep
+---
 
-🧰 Developer aliases for:
+# 📦 Tools Used
 
-Git
+## 🖥 Terminal Emulator
 
-Docker
+### Alacritty
 
-Laravel
+Alacritty is a **GPU accelerated terminal emulator written in Rust**.
 
-Node / Bun / PNPM
+Advantages:
 
-Python
-
-Database tools
-
-Tools Used
-Terminal Emulator
-
-Alacritty
-
-Alacritty is a GPU accelerated terminal emulator written in Rust.
-It is extremely fast and minimal compared to traditional terminals.
+* Extremely fast
+* GPU rendering
+* Minimal configuration
+* Cross-platform
 
 Official repository:
+
 https://github.com/alacritty/alacritty
 
 Documentation:
+
 https://alacritty.org
 
-Shell
+---
 
-Zsh
+## 🐚 Shell
 
-Zsh (Z Shell) is an extended version of Bash with powerful features such as:
+### Zsh
 
-better tab completion
-
-improved scripting
-
-plugin ecosystem
-
-powerful customization
-
-Official site:
-https://www.zsh.org/
-
-Documentation:
-https://zsh.sourceforge.io/Doc/
-
-Prompt Theme
-
-Powerlevel10k
-
-Powerlevel10k is a fast and highly customizable prompt theme for Zsh.
+Zsh (Z Shell) is a powerful Unix shell that extends Bash.
 
 Features:
 
-extremely fast prompt rendering
+* Advanced tab completion
+* Plugin ecosystem
+* Powerful scripting
+* Highly customizable
 
-Git status integration
+Official site:
 
-configurable icons
+https://www.zsh.org/
 
-async prompt rendering
+Documentation:
+
+https://zsh.sourceforge.io/Doc/
+
+---
+
+## 🎨 Prompt Theme
+
+### Powerlevel10k
+
+Powerlevel10k is a **fast and highly customizable prompt theme for Zsh**.
+
+Features:
+
+* Extremely fast prompt rendering
+* Git status integration
+* Icon support (Nerd Fonts)
+* Asynchronous prompt updates
 
 Official repository:
+
 https://github.com/romkatv/powerlevel10k
 
-Dependencies
+---
 
-This setup uses several modern CLI tools:
+# 📚 Dependencies
 
-Tool Description
-eza modern replacement for ls
-bat cat with syntax highlighting
-fd faster find
-ripgrep fast text search
-fzf fuzzy finder
-htop system monitoring
-Installation Guide
+This setup uses several modern CLI tools.
 
-Below are the steps required to install the terminal environment manually.
+| Tool      | Description                    |
+| --------- | ------------------------------ |
+| `eza`     | Modern replacement for `ls`    |
+| `bat`     | `cat` with syntax highlighting |
+| `fd`      | Faster alternative to `find`   |
+| `ripgrep` | High performance text search   |
+| `fzf`     | Fuzzy finder                   |
+| `htop`    | System monitor                 |
 
-1. Install Zsh
-   Arch Linux
-   sudo pacman -S zsh
-   Ubuntu / Debian
-   sudo apt install zsh
-   Fedora
-   sudo dnf install zsh
+---
+
+# ⚙️ Installation Guide
+
+Follow these steps to install the terminal environment.
+
+---
+
+# 1️⃣ Install Zsh
+
+### Arch Linux
+
+```bash
+sudo pacman -S zsh
+```
+
+### Ubuntu / Debian
+
+```bash
+sudo apt install zsh
+```
+
+### Fedora
+
+```bash
+sudo dnf install zsh
+```
 
 Check installation:
 
+```bash
 zsh --version
+```
 
 Set Zsh as default shell:
 
+```bash
 chsh -s $(which zsh)
+```
 
 Logout and login again.
 
 Reference:
 https://wiki.archlinux.org/title/Zsh
 
-2. Install Alacritty
-   Arch Linux
-   sudo pacman -S alacritty
-   Ubuntu
-   sudo apt install alacritty
-   Fedora
-   sudo dnf install alacritty
+---
+
+# 2️⃣ Install Alacritty
+
+### Arch Linux
+
+```bash
+sudo pacman -S alacritty
+```
+
+### Ubuntu
+
+```bash
+sudo apt install alacritty
+```
+
+### Fedora
+
+```bash
+sudo dnf install alacritty
+```
 
 Check installation:
 
+```bash
 alacritty --version
+```
 
 Reference:
 https://github.com/alacritty/alacritty/blob/master/INSTALL.md
 
-3. Install Powerlevel10k
+---
 
-Clone the theme repository:
+# 3️⃣ Install Powerlevel10k
 
+Clone repository:
+
+```bash
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
 ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
 
-Then enable it inside .zshrc:
+Enable in `.zshrc`:
 
+```bash
 source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+```
 
 Run configuration wizard:
 
+```bash
 p10k configure
+```
 
 This will generate:
 
+```
 ~/.p10k.zsh
+```
 
 Reference:
-https://github.com/romkatv/powerlevel10k#installation
+https://github.com/romkatv/powerlevel10k
 
-4. Install Required CLI Tools
-   Arch Linux
-   sudo pacman -S \
-   fzf \
-   fd \
-   ripgrep \
-   bat \
-   eza \
-   htop
-   Ubuntu
-   sudo apt install \
-   fzf \
-   fd-find \
-   ripgrep \
-   bat \
-   eza \
-   htop
+---
 
-Reference:
-https://github.com/sharkdp/fd
-https://github.com/BurntSushi/ripgrep
-https://github.com/junegunn/fzf
+# 4️⃣ Install Required CLI Tools
 
-5. Clone This Repository
+### Arch Linux
 
-Clone the configuration repository:
+```bash
+sudo pacman -S \
+fzf \
+fd \
+ripgrep \
+bat \
+eza \
+htop
+```
 
+### Ubuntu
+
+```bash
+sudo apt install \
+fzf \
+fd-find \
+ripgrep \
+bat \
+eza \
+htop
+```
+
+---
+
+# 📥 Clone This Repository
+
+```bash
 git clone https://github.com/ZalStack/linux-terminal-setup.git
+```
 
-Enter the directory:
+Enter directory:
 
+```bash
 cd linux-terminal-setup
+```
 
-Run the installer:
+Run installer:
 
+```bash
 chmod +x install.sh
-./install.sh 6. File Structure
+./install.sh
+```
+
+---
+
+# 📁 Project Structure
+
+```
 linux-terminal-setup
 │
 ├── README.md
 ├── install.sh
 │
-├── zsh
-│ ├── .zshrc
-│ ├── .p10k.zsh
-│ └── plugins
-│
 ├── alacritty
-│ └── alacritty.toml
+│   └── alacritty.toml
 │
-└── config
-└── ls_colors 7. Screenshots
+├── config
+│   └── ls_colors
+│
+└── zsh
+    ├── .zshrc
+    ├── .p10k.zsh
+    └── plugins
+```
 
-Example terminal appearance:
+---
 
+# 🖥 Example Terminal
+
+```
 user@machine ~/project main
-❯ git status 8. References
+❯ git status
+```
 
-Official documentation:
+---
 
-Zsh
-https://www.zsh.org/
+# 📖 References
 
-Alacritty
-https://alacritty.org
+* https://www.zsh.org/
+* https://alacritty.org
+* https://github.com/romkatv/powerlevel10k
+* https://wiki.archlinux.org/title/Zsh
 
-Powerlevel10k
-https://github.com/romkatv/powerlevel10k
+---
 
-Arch Wiki Zsh Guide
-https://wiki.archlinux.org/title/Zsh
-
-License
+# 📄 License
 
 MIT License
-=======
-# linux-terminal-setup
-My Config Terminal  Alacritty + zsh + p10k
->>>>>>> fe8f752a8b004b47fd7ca41691d3d0c8340b1fe2
