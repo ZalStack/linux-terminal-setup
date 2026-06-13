@@ -11,6 +11,7 @@ source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+
 # =====================================================
 # PATHS
 # =====================================================
@@ -23,6 +24,10 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # SDKMAN
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+# Plugins
+source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 fpath=(~/.zsh/plugins/zsh-completions/src $fpath)
 autoload -Uz compinit
@@ -39,7 +44,15 @@ setopt HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS
 export LS_COLORS="$(cat ~/.config/ls_colors)"
 
 # Files
-alias ls='eza --icons=auto --group-directories-first --color=always'
+function ls() {
+  if [[ -z "$(command ls -A . 2>/dev/null)" ]]; then
+    echo
+    print -P "  %K{229}%F{238}  ⚠  No such file or directory  %k%f"
+    echo
+  else
+    eza --icons=auto --group-directories-first --color=always "$@"
+  fi
+}
 alias ll='eza -lah --icons=auto --group-directories-first --color=always'
 alias la='eza -a --icons --color=always'
 alias tree='eza --tree --icons'
@@ -58,6 +71,15 @@ alias mkdirp='mkdir -pv'
 alias rmf='rm -rf'
 alias c='clear'
 alias h='history'
+alias d='cd /run/media/maszal_08/data'
+alias nodeproj='cd ~/Desktop/project/development/node'
+alias pyproj='cd ~/Desktop/project/development/py'
+alias phpproj='cd ~/Desktop/project/development/php'
+alias javaproj='cd ~/Desktop/project/development/java'
+alias .zshrc='~/.zshrc'
+alias mlproj='cd ~/Desktop/project/development/marchine-learning'
+alias cproj='cd ~/Desktop/project/development/c'
+alias javaproj='cd ~/Desktop/project/development/java'
 
 # Search Impection
 alias grep='rg'
@@ -160,6 +182,7 @@ alias speed='speedtest-cli'
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown now'
 
+# Database Aliases
 # PostgreSQL
 alias pgroot='psql -h 127.0.0.1 -U myuser -d postgres'
 alias pgdb='psql -h 127.0.0.1 -U myuser'
@@ -172,9 +195,14 @@ alias mongo-local='mongosh'
 alias mysql-user='mysql -u fakhrizal -p'
 alias mysql-root='mysql -u root -p'
 
-export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd --type d'
+# Tmux management aliases
+alias tmux-list='tmux list-sessions'
+alias tmux-kill='tmux kill-session -t'
+alias tmux-new='tmux new-session -s'
+alias tmux-detach='tmux detach'
+
+# Tmux attach with fzf selection
+alias tmux-attach='tmux attach-session -t $(tmux list-sessions -F "#{session_name}" | fzf)'
 
 export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -186,6 +214,7 @@ export FZF_DEFAULT_OPTS='
 --border
 --preview "bat --style=numbers --color=always {}"
 '
+
 [ -f "$HOME/.local/bin/env" ] && source "$HOME/.local/bin/env"
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
@@ -194,11 +223,34 @@ cd() {
 
   [[ "$PWD" == "/" ]] && return
 
-  if [[ -z "$(ls -A . 2>/dev/null)" ]]; then
+  if [[ -z "$(command ls -A . 2>/dev/null)" ]]; then
     echo
-    print -P "  %K{229}%F{238}  ⚠  No such file or directory  %k%f"
+    print -P "  %K{229}%F{238}  ⚠  Empty directory  %k%f"
     echo
   fi
 }
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
+
+
+_before_prompt() {
+    unset _p9k__params
+    source ~/.p10k.zsh
+}
+typeset -ag precmd_functions
+if (( ! ${precmd_functions[(I)_before_prompt]} )); then
+    precmd_functions=(_before_prompt $precmd_functions)
+fi
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+export FLUTTER_SUPPRESS_ANALYTICS=true
+export DART_SUPPRESS_ANALYTICS=true
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# Force block cursor
+_fix_cursor() { echo -ne '\e[2 q' }
+precmd_functions+=(_fix_cursor)
